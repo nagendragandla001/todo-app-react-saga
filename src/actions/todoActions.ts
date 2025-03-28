@@ -6,10 +6,14 @@ export const ADD_TODO_REQUEST = "ADD_TODO_REQUEST";
 export const ADD_TODO_SUCCESS = "ADD_TODO_SUCCESS";
 export const ADD_TODO_FAILURE = "ADD_TODO_FAILURE";
 
+export const DELETE_TODO_REQUEST = "DELETE_TODO_REQUEST";
+export const DELETE_TODO_SUCCESS = "DELETE_TODO_SUCCESS";
+export const DELETE_TODO_FAILURE = "DELETE_TODO_FAILURE";
+
 export interface Todo {
   id: number;
   title: string;
-  status: "DRAFT" | "COMPLETED";
+  completed: boolean;
 }
 
 export interface FetchTodoRequestAction {
@@ -41,6 +45,21 @@ export interface AddTodoFailureAction {
   payload: string;
 }
 
+export interface DeleteTodoRequestAction {
+  type: typeof DELETE_TODO_REQUEST;
+  payload: number;
+}
+
+export interface DeleteTodoSuccessAction {
+  type: typeof DELETE_TODO_SUCCESS;
+  payload: number;
+}
+
+export interface DeleteTodoFailureAction {
+  type: typeof DELETE_TODO_FAILURE;
+  payload: string;
+}
+
 export const fetchTodoRequest = (): FetchTodoRequestAction => ({
   type: FETCH_TODO_REQUEST,
 });
@@ -64,5 +83,20 @@ export const addTodoSuccess = (todo: Todo): AddTodoSuccessAction => ({
 });
 export const addTodoFailure = (error: string): AddTodoFailureAction => ({
   type: ADD_TODO_FAILURE,
+  payload: error,
+});
+
+export const deleteTodoRequest = (id: number): DeleteTodoRequestAction => ({
+  type: DELETE_TODO_REQUEST,
+  payload: id,
+});
+
+export const deleteTodoSuccess = (id: number): DeleteTodoSuccessAction => ({
+  type: DELETE_TODO_SUCCESS,
+  payload: id,
+});
+
+export const deleteTodoFailure = (error: string): DeleteTodoFailureAction => ({
+  type: DELETE_TODO_FAILURE,
   payload: error,
 });
