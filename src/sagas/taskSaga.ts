@@ -17,7 +17,7 @@ import {
   deleteTodoFailure,
   Todo,
 } from "../actions/todoActions";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
 
 const fetchTodosFromApi = async (): Promise<Todo[]> => {
   const response = await axios.get(
@@ -64,6 +64,7 @@ function* addTodosSaga(action: { type: string; payload: Todo }) {
 function* deleteTodoFromApi(action: { type: string; payload: number }) {
   try {
     const todo: Todo = yield call(deleteTodoApi, action.payload);
+    yield delay(2000);
     yield put(deleteTodoSuccess(action.payload));
   } catch (error: any) {
     yield put(deleteTodoFailure(error.message));
