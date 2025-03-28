@@ -37,7 +37,7 @@ const Todos = () => {
 
   return (
     <div className="max-w-sm flex flex-col gap-2">
-      <h2>Todos Manager</h2>
+      <h2 className="text-xl font-semibold">Todos Manager</h2>
       <div className="flex gap-4">
         <input
           type="text"
@@ -48,7 +48,8 @@ const Todos = () => {
         />
         <button
           onClick={handleAddTask}
-          className="p-2 cursor-pointer text-white bg-blue-400 rounded"
+          disabled={!newTodo}
+          className="p-2 cursor-pointer text-white bg-blue-400 rounded disabled:bg-gray-200 disabled:cursor-not-allowed"
         >
           Add Task
         </button>
